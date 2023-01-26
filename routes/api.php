@@ -21,5 +21,10 @@ Route::controller(UserController::class)
         Route::post('/login', 'login');
         Route::post('/logout', 'logout')->middleware(['auth:sanctum']);
         Route::get('/self-user', 'getUser')->middleware(['auth:sanctum']);
-        Route::get('/users', 'getUser')->middleware(['auth:sanctum']);
+
+        Route::get('/users', 'list')->middleware(['auth:sanctum']);
+        Route::post('/users', 'createOrUpdate')->middleware(['auth:sanctum']);
+        Route::get('/users/{id}', 'show')->middleware(['auth:sanctum']);
+        Route::delete('/users', 'delete')->middleware(['auth:sanctum']);
+        Route::get('/users/{id}/payments', 'payments')->middleware(['auth:sanctum']);
     });

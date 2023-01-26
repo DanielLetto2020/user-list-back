@@ -5,7 +5,7 @@ namespace App\Http\Resources\User;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RUser extends JsonResource
+class RUserOther extends JsonResource
 {
     /**
      * @var User
@@ -18,8 +18,8 @@ class RUser extends JsonResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'email' => $this->resource->email,
-            'scope' => $this->resource->tokens()->first()->abilities,
             'phone' => $this->resource->phone,
+            'payments' => $this->whenLoaded('payments'),
         ];
     }
 }

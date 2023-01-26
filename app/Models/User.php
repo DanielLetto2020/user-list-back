@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -48,6 +49,8 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read Collection|\App\Models\UserPayment[] $payments
+ * @property-read int|null $payments_count
  */
 class User extends Authenticatable
 {
@@ -85,4 +88,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'abilities' => 'array',
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(UserPayment::class);
+    }
 }
